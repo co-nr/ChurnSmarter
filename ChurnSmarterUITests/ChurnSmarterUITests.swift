@@ -1,10 +1,3 @@
-//
-//  ChurnSmarterUITests.swift
-//  ChurnSmarterUITests
-//
-//  Created by Connor on 11/4/24.
-//
-
 import XCTest
 
 final class ChurnSmarterUITests: XCTestCase {

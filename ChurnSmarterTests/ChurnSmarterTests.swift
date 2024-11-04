@@ -1,10 +1,3 @@
-//
-//  ChurnSmarterTests.swift
-//  ChurnSmarterTests
-//
-//  Created by Connor on 11/4/24.
-//
-
 import Testing
 @testable import ChurnSmarter
 
