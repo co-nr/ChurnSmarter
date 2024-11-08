@@ -1,9 +1,17 @@
 import SwiftUI
 
 struct OffersView: View {
+    
+    @StateObject private var viewModel = OffersViewModel()
+    
     var body: some View {
-        Text("Offers View")
-            .bold()
+        NavigationStack {
+            ScrollView {
+                ForEach(viewModel.allCards) { card in
+                    CardCell(card: card)
+                }
+            }
+        }
     }
 }
 

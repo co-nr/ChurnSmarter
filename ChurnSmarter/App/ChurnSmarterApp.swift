@@ -4,7 +4,7 @@ import SwiftUI
 struct ChurnSmarterApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            OffersView()
         }
     }
 }
