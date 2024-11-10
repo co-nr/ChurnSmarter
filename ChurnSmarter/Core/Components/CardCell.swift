@@ -2,6 +2,7 @@ import SwiftUI
 
 struct CardCell: View {
     
+    @EnvironmentObject private var theme: ThemeManager
     let card: Card
     
     var body: some View {
@@ -15,6 +16,7 @@ struct CardCell: View {
     }
 }
 
-//#Preview {
-//    CardCell()
-//}
+#Preview {
+    OffersView()
+        .environmentObject(ThemeManager())
+}

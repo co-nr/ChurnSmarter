@@ -1,6 +1,13 @@
 import SwiftUI
 import Combine
 
+/*
+ Wyndham Rewards Earner - SVG File
+ Latam Airlines - SVG File
+ Savor - down
+ Business Altitude Power - down
+*/
+
 final class CardImageService {
     
     @Published var image: UIImage? = nil

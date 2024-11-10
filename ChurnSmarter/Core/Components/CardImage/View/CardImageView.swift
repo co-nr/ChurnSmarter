@@ -14,12 +14,9 @@ struct CardImageView: View {
                 Image(uiImage: image)
                     .resizable()
             } else if viewModel.isLoading {
-                ProgressView()
+                Image(systemName: "creditcard.fill")
+                    .resizable()
             }
         }
     }
 }
-
-//#Preview {
-//    CardImageView()
-//}
