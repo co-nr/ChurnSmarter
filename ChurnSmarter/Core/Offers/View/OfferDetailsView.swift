@@ -19,7 +19,7 @@ struct OfferDetailsView: View {
 }
 
 #Preview {
-    OffersView()
+    OfferDetailsView(card: DeveloperPreview.card)
         .environmentObject(ThemeManager())
 }
 

@@ -44,6 +44,6 @@ struct CardCell: View {
 }
 
 #Preview {
-    OffersView()
+    CardCell(card: DeveloperPreview.card)
         .environmentObject(ThemeManager())
 }
