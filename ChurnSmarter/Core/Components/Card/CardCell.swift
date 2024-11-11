@@ -25,6 +25,7 @@ struct CardCell: View {
                     Spacer()
                     Text("$555")
                         .font(.headline)
+                        .foregroundStyle(theme.labelColor)
                 }
                 Divider()
             }

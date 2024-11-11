@@ -14,7 +14,9 @@ struct OffersView: View {
                 ScrollView(showsIndicators: false) {
                     LazyVStack {
                         ForEach(viewModel.allCards) { card in
-                            CardCell(card: card)
+                            NavigationLink(destination: OfferDetailsView(card: card)) {
+                                CardCell(card: card)
+                            }
                         }
                     }
                 }
