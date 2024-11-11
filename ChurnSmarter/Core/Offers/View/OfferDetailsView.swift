@@ -9,7 +9,29 @@ struct OfferDetailsView: View {
         NavigationStack {
             List {
                 cardImageSection
+                Section("Overview") {
+                    HStack {
+                        Text("Issuer")
+                            .fontWeight(.medium)
+                        Spacer()
+                        Text(card.issuer.format)
+                    }
+                    HStack {
+                        Text("Currency")
+                            .fontWeight(.medium)
+                        Spacer()
+                        Text(card.currency.format)
+                    }
+                    HStack {
+                        Text("Annual Fee")
+                            .fontWeight(.medium)
+                        Spacer()
+                        Text("$\(card.annualFee)")
+                    }
+                }
+                .listRowBackground(theme.secondaryBackgroundColor)
             }
+            .font(.subheadline)
             .background(theme.primaryBackgroundColor)
             .scrollContentBackground(.hidden)
             .navigationTitle(card.name)

@@ -24,26 +24,4 @@ struct Card: Identifiable, Decodable {
         return "https://offeroptimist.com" + imageUrl
     }
     
-    struct Offer: Decodable {
-        let spend: Double
-        let amount: [Amount]
-        let days: Int
-        let expiration: String?
-        let isPublic: Bool?
-        let credits: [Credit]
-        let details: String?
-        let url: String?
-        let referralUrl: String?
-    }
-    
-    struct Credit: Decodable {
-        let description: String?
-        let value: Double?
-    }
-    
-    struct Amount: Decodable {
-        let description: String?
-        let value: Double?
-    }
-    
 }
