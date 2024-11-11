@@ -12,8 +12,10 @@ struct OffersView: View {
                 theme.primaryBackgroundColor.ignoresSafeArea()
                 
                 ScrollView(showsIndicators: false) {
-                    ForEach(viewModel.allCards) { card in
-                        CardCell(card: card)
+                    LazyVStack {
+                        ForEach(viewModel.allCards) { card in
+                            CardCell(card: card)
+                        }
                     }
                 }
                 .navigationTitle("Offers")

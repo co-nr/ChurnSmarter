@@ -16,6 +16,7 @@ struct SettingsView: View {
             .scrollContentBackground(.hidden)
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar { CloseToolbarItem() }
         }
         .tint(theme.tintColor)
     }

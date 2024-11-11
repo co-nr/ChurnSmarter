@@ -3,7 +3,7 @@ import Foundation
 //https://raw.githubusercontent.com/andenacitelli/credit-card-bonuses-api/main/exports/data.json
 
 struct Card: Identifiable, Decodable {
-    var id: UUID { UUID() }
+    let id = UUID()
     let name: String
     let issuer: String
     let network: String
@@ -16,8 +16,34 @@ struct Card: Identifiable, Decodable {
     let universalCashbackPercent: Double
     let url: String
     let imageUrl: String
+    let credits: [Credit]
+    let offers: [Offer]
+    let historicalOffers: [Offer]
     
     var imageUrlWithPrefix: String {
         return "https://offeroptimist.com" + imageUrl
     }
+    
+    struct Offer: Decodable {
+        let spend: Double
+        let amount: [OfferAmount]
+        let days: Int
+        let expiration: String?
+        let isPublic: Bool?
+        let credits: [Credit]
+        let details: String?
+        let url: String?
+        let referralUrl: String?
+    }
+    
+    struct Credit: Decodable {
+        let description: String?
+        let value: Double?
+    }
+    
+    struct OfferAmount: Decodable {
+        let description: String?
+        let value: Double?
+    }
+    
 }
