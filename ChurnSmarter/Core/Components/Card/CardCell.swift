@@ -18,7 +18,7 @@ struct CardCell: View {
                         Text(card.name)
                             .font(.headline)
                             .foregroundStyle(theme.tintColor)
-                        Text(card.issuer.lowercased().replacingOccurrences(of: "_", with: " ").capitalized)
+                        Text(card.issuer.format)
                             .font(.subheadline)
                             .foregroundStyle(theme.labelColor.secondary)
                     }
@@ -34,7 +34,7 @@ struct CardCell: View {
         .cornerRadius(8)
         .shadow(color: .black.opacity(0.1), radius: 10, x: 0, y: 5)
         .overlay(
-            RoundedRectangle(cornerRadius: 10)
+            RoundedRectangle(cornerRadius: 8)
                 .stroke(theme.labelColor.opacity(0.3), lineWidth: 1)
         )
         .padding(.horizontal, 10)

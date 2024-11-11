@@ -26,7 +26,7 @@ struct Card: Identifiable, Decodable {
     
     struct Offer: Decodable {
         let spend: Double
-        let amount: [OfferAmount]
+        let amount: [Amount]
         let days: Int
         let expiration: String?
         let isPublic: Bool?
@@ -41,7 +41,7 @@ struct Card: Identifiable, Decodable {
         let value: Double?
     }
     
-    struct OfferAmount: Decodable {
+    struct Amount: Decodable {
         let description: String?
         let value: Double?
     }
