@@ -10,6 +10,10 @@ struct Offer: Decodable {
     let details: String?
     let url: String?
     let referralUrl: String?
+    
+    var highestAmount: Int {
+        amount.compactMap { $0.amount }.max() ?? 0
+    }
 }
 
 struct OfferAmount: Decodable {

@@ -16,7 +16,7 @@ struct OffersView: View {
                     LazyVStack {
                         ForEach(viewModel.allCards) { card in
                             NavigationLink(destination: OfferDetailsView(card: card)) {
-                                OfferCell(card: card)
+                                OfferCellView(card: card)
                             }
                         }
                     }

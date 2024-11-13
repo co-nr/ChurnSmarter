@@ -3,15 +3,16 @@ import SwiftUI
 struct OfferDetailsView: View {
     
     @EnvironmentObject private var theme: ThemeManager
+    @State private var isShowingOfferValue = false
     let card: Card
     
-    private var pointsValue: String? {
-        if card.currency.lowercased() == "usd" {
-            return nil
-        }
-        let pointValue = card.getPointValue(for: card.currency) * 100
-        return String(format: "%.2f¢", pointValue)
-    }
+//    private var pointsValue: String? {
+//        if card.currency.lowercased() == "usd" {
+//            return nil
+//        }
+//        let pointValue = card.getPointValue(for: card.currency) * 100
+//        return String(format: "%.2f¢", pointValue)
+//    }
     
     var body: some View {
         NavigationStack {
@@ -30,19 +31,29 @@ struct OfferDetailsView: View {
                         Spacer()
                         Text(card.currency.format)
                     }
-                    if let pointsValue = pointsValue {
-                        HStack {
-                            Text("Points Value")
-                                .fontWeight(.medium)
-                            Spacer()
-                            Text(pointsValue)
-                        }
-                    }
+//                    if let pointsValue = pointsValue {
+//                        HStack {
+//                            Text("Points Value")
+//                                .fontWeight(.medium)
+//                            Spacer()
+//                            Text(pointsValue)
+//                        }
+//                    }
                     HStack {
                         Text("Annual Fee")
                             .fontWeight(.medium)
                         Spacer()
                         Text("$\(card.annualFee)")
+                    }
+                    HStack {
+                        Text("Offer Value")
+                            .fontWeight(.medium)
+                        Spacer()
+                        Button {
+                            
+                        } label: {
+                            
+                        }
                     }
                 }
                 .listRowBackground(theme.secondaryBackgroundColor)
