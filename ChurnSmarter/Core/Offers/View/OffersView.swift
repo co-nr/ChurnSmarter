@@ -5,6 +5,7 @@ struct OffersView: View {
     @StateObject private var viewModel = OffersViewModel()
     @EnvironmentObject private var theme: ThemeManager
     @State private var isShowingSettings = false
+    @State private var isShowingFilters = false
     
     var body: some View {
         NavigationStack {
@@ -15,7 +16,7 @@ struct OffersView: View {
                     LazyVStack {
                         ForEach(viewModel.allCards) { card in
                             NavigationLink(destination: OfferDetailsView(card: card)) {
-                                CardCell(card: card)
+                                OfferCell(card: card)
                             }
                         }
                     }
@@ -23,13 +24,23 @@ struct OffersView: View {
                 .navigationTitle("Offers")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            self.isShowingFilters = true
+                        } label: {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                        }
+                    }
                     ToolbarItem(placement: .topBarLeading) {
                         Button {
-                            isShowingSettings = true
+                            self.isShowingSettings = true
                         } label: {
                             Image(systemName: "gear")
                         }
                     }
+                }
+                .sheet(isPresented: $isShowingFilters) {
+                    
                 }
                 .sheet(isPresented: $isShowingSettings) {
                     SettingsView()

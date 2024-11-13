@@ -23,5 +23,19 @@ struct Card: Identifiable, Decodable {
     var imageUrlWithPrefix: String {
         return "https://offeroptimist.com" + imageUrl
     }
-    
 }
+
+extension Card {
+    func getPointValue(for currency: String) -> Double {
+        return pointValues[currency] ?? 0.01
+    }
+    var highestOfferValue: String {
+        guard let highestAmount = offers.compactMap({ $0.amount.first?.amount }).max() else {
+            return "$0.00"
+        }
+        let pointValue = getPointValue(for: currency)
+        let monetaryValue = Double(highestAmount) * pointValue
+        return String(format: "$%.0f", monetaryValue)
+    }
+}
+

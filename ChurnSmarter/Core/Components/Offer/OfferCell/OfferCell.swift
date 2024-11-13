@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct CardCell: View {
+struct OfferCell: View {
     
     @EnvironmentObject private var theme: ThemeManager
     let card: Card
@@ -20,12 +20,12 @@ struct CardCell: View {
     }
     
     private func percentageOfHistoricalMax() -> Double {
-        guard let currentOffer = card.offers.first?.amount.first?.amount else { return 0 }
+        guard let highestCurrentOffer = card.offers.compactMap({ $0.amount.first?.amount }).max() else { return 0 }
         let topOffer = topHistoricalOffer()
         
         if topOffer == 0 { return 100 }
         
-        return (Double(currentOffer) / Double(topOffer)) * 100
+        return (Double(highestCurrentOffer) / Double(topOffer)) * 100
     }
     
     var body: some View {
@@ -47,7 +47,7 @@ struct CardCell: View {
                     }
                     .multilineTextAlignment(.leading)
                     Spacer()
-                    Text("$555")
+                    Text("\(card.highestOfferValue)")
                         .font(.headline)
                 }
                 
@@ -70,11 +70,12 @@ struct CardCell: View {
                 
                 Divider()
                 VStack(alignment: .leading) {
-                    if let firstOffer = card.offers.first, let amount = firstOffer.amount.first {
+                    if let highestOffer = card.offers.max(by: { ($0.amount.first?.amount ?? 0) < ($1.amount.first?.amount ?? 0) }),
+                       let amount = highestOffer.amount.first {
                         Text("\(amount.amount) \(amount.currency?.format ?? card.currency.format)")
                             .font(.subheadline)
                             .fontWeight(.medium)
-                        Text("Spend $\(firstOffer.spend, specifier: "%.0f") in \(firstOffer.days) days")
+                        Text("Spend $\(highestOffer.spend, specifier: "%.0f") in \(highestOffer.days) days")
                             .foregroundStyle(.secondary)
                             .font(.footnote)
                     } else {
@@ -98,6 +99,7 @@ struct CardCell: View {
         .padding(.vertical, 3)
     }
 }
+
 
 #Preview {
     OffersView()
