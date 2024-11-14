@@ -3,6 +3,7 @@ import SwiftUI
 struct OfferFiltersView: View {
     
     @EnvironmentObject private var theme: ThemeManager
+    @EnvironmentObject var viewModel: OffersViewModel
     
     var body: some View {
         NavigationStack {
@@ -21,4 +22,5 @@ struct OfferFiltersView: View {
 #Preview {
     OfferFiltersView()
         .environmentObject(ThemeManager())
+        .environmentObject(OffersViewModel())
 }

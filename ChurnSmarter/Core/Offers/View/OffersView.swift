@@ -2,6 +2,7 @@ import SwiftUI
 
 struct OffersView: View {
     
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
     @StateObject private var viewModel = OffersViewModel()
     @EnvironmentObject private var theme: ThemeManager
     @State private var isShowingSettings = false
@@ -13,15 +14,26 @@ struct OffersView: View {
                 theme.primaryBackgroundColor.ignoresSafeArea()
                 
                 ScrollView(showsIndicators: false) {
-                    LazyVStack {
-                        ForEach(viewModel.allCards) { card in
-                            NavigationLink(destination: OfferDetailsView(card: card)) {
-                                OfferCellView(card: card)
+                    if horizontalSizeClass == .compact {
+                        LazyVStack {
+                            ForEach(viewModel.allCards) { card in
+                                NavigationLink(destination: OfferDetailsView(card: card)) {
+                                    OfferCellView(card: card)
+                                }
+                            }
+                        }
+                    } else {
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
+                            ForEach(viewModel.allCards) { card in
+                                NavigationLink(destination: OfferDetailsView(card: card)) {
+                                    OfferCellView(card: card)
+                                }
                             }
                         }
                     }
                 }
-                .navigationTitle("Offers")
+                .searchable(text: $viewModel.searchText, prompt: "Card Name or Issuer")
+                .navigationTitle("Offers (\(viewModel.allCards.count))")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {

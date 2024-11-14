@@ -4,6 +4,7 @@ import Combine
 final class OffersViewModel: ObservableObject {
     
     @Published var allCards: [Card] = []
+    @Published var searchText: String = ""
       
     private let cardDataService = CardDataService()
     private var cancellables = Set<AnyCancellable>()
