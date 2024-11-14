@@ -32,18 +32,18 @@ final class OfferCellViewModel: ObservableObject {
         return highestHistoricalOffer == 0 ? 100 : (Double(highestCurrentOffer) / Double(highestHistoricalOffer)) * 100
     }
     
-    var currentOfferValue: String {
-        return calculator.currentOfferValue
+    var currentOfferValueText: String {
+        return calculator.netOfferValue
     }
     
-    var currentOffer: String {
+    var currentOfferText: String {
         if let amount = card.offers.compactMap({ $0.highestAmount }).max() {
             return "\(amount.formatted(.number)) \(card.currency.format)"
         }
         return "No offers available"
     }
     
-    var currentOfferSpend: String {
+    var currentOfferSpendText: String {
         if let highestOffer = card.offers.max(by: { $0.highestAmount < $1.highestAmount }) {
             return String(format: "Spend $%@ in %d days", highestOffer.spend.formatted(.number), highestOffer.days)
         }

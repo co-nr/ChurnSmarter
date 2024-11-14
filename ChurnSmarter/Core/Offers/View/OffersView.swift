@@ -40,7 +40,10 @@ struct OffersView: View {
                     }
                 }
                 .sheet(isPresented: $isShowingFilters) {
-                    
+                    OfferFiltersView()
+                        .environmentObject(viewModel)
+                        .presentationDetents([.medium, .large])
+                        .presentationBackground(.thinMaterial)
                 }
                 .sheet(isPresented: $isShowingSettings) {
                     SettingsView()

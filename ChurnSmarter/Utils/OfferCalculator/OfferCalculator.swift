@@ -12,16 +12,40 @@ final class OfferCalculator {
         return pointValues[currency] ?? 0.01
     }
     
-    var currentOfferValue: String {
+    var offerBreakdownText: String {
         guard let highestAmount = card.offers.compactMap({ $0.highestAmount }).max(), highestAmount > 0 else {
-            return "$0.00"
+            return "No offers available"
+        }
+        
+        if card.currency == "USD" {
+            return "Gross Value:"
+        }
+        
+        let pointValue = getPointValue(for: card.currency) * 100
+        return "\(highestAmount.formatted(.number)) points @ \(String(format: "%.2f", pointValue))¢ per point:"
+    }
+    
+    var grossOfferValue: String {
+        guard let highestAmount = card.offers.compactMap({ $0.highestAmount }).max(), highestAmount > 0 else {
+            return "$0"
+        }
+        
+        let pointValue = getPointValue(for: card.currency)
+        let totalValue = Double(highestAmount) * pointValue
+        
+        return String(format: "$%.0f", totalValue)
+    }
+    
+    var netOfferValue: String {
+        guard let highestAmount = card.offers.compactMap({ $0.highestAmount }).max(), highestAmount > 0 else {
+            return "$0"
         }
         
         let pointValue = getPointValue(for: card.currency)
         let monetaryValue = Double(highestAmount) * pointValue
-        
         let netValue = monetaryValue - Double(card.annualFee)
         
         return String(format: "$%.0f", netValue)
     }
 }
+

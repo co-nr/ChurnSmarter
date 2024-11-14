@@ -3,60 +3,30 @@ import SwiftUI
 struct OfferDetailsView: View {
     
     @EnvironmentObject private var theme: ThemeManager
-    @State private var isShowingOfferValue = false
     let card: Card
+    private let calculator: OfferCalculator
     
-//    private var pointsValue: String? {
-//        if card.currency.lowercased() == "usd" {
-//            return nil
-//        }
-//        let pointValue = card.getPointValue(for: card.currency) * 100
-//        return String(format: "%.2f¢", pointValue)
-//    }
+    init(card: Card) {
+        self.card = card
+        self.calculator = OfferCalculator(card: card)
+    }
     
     var body: some View {
         NavigationStack {
             List {
                 cardImageSection
-                Section("Overview") {
-                    HStack {
-                        Text("Issuer")
-                            .fontWeight(.medium)
-                        Spacer()
-                        Text(card.issuer.format)
-                    }
-                    HStack {
-                        Text("Currency")
-                            .fontWeight(.medium)
-                        Spacer()
-                        Text(card.currency.format)
-                    }
-//                    if let pointsValue = pointsValue {
-//                        HStack {
-//                            Text("Points Value")
-//                                .fontWeight(.medium)
-//                            Spacer()
-//                            Text(pointsValue)
-//                        }
-//                    }
-                    HStack {
-                        Text("Annual Fee")
-                            .fontWeight(.medium)
-                        Spacer()
-                        Text("$\(card.annualFee)")
-                    }
-                    HStack {
-                        Text("Offer Value")
-                            .fontWeight(.medium)
-                        Spacer()
-                        Button {
-                            
-                        } label: {
-                            
-                        }
-                    }
+                overviewSection
+                if !card.offers.isEmpty {
+                    OffersSection(title: "Current Offers", offers: card.offers, currency: card.currency.format)
                 }
-                .listRowBackground(theme.secondaryBackgroundColor)
+                if !card.historicalOffers.isEmpty {
+                    OffersSection(title: "Historical Offers", offers: card.historicalOffers, currency: card.currency.format)
+                }
+                
+                if !card.credits.isEmpty {
+                    CreditsSection(title: "Credits", credits: card.credits)
+                }
+                
             }
             .font(.subheadline)
             .background(theme.primaryBackgroundColor)
@@ -68,7 +38,7 @@ struct OfferDetailsView: View {
 }
 
 #Preview {
-    OfferDetailsView(card: DeveloperPreview.card)
+    OffersView()
         .environmentObject(ThemeManager())
 }
 
@@ -84,5 +54,37 @@ extension OfferDetailsView {
             }
         }
         .listRowBackground(Color.clear)
+    }
+    
+    private var overviewSection: some View {
+        Section("Overview") {
+            OverviewRow(title: "Issuer", value: card.issuer.format)
+            OverviewRow(title: "Currency", value: card.currency.format)
+            OverviewRow(title: "Annual Fee", value: "$\(card.annualFee)")
+            if card.currency != "USD" {
+                OverviewRow(title: "Points Value", value: "\(String(format: "%.2f", calculator.getPointValue(for: card.currency) * 100))¢")
+            }
+            if let url = URL(string: card.url) {
+                HStack {
+                    Text("Official Page:")
+                        .fontWeight(.medium)
+                    Spacer()
+                    Link(destination: url) {
+                        Image(systemName: "link")
+                    }
+                }
+            }
+            if let referralLink = card.referralLink {
+                HStack {
+                    Text("Referral Link:")
+                        .fontWeight(.medium)
+                    Spacer()
+                    Link(destination: referralLink) {
+                        Image(systemName: "link")
+                    }
+                }
+            }
+        }
+        .listRowBackground(theme.secondaryBackgroundColor)
     }
 }

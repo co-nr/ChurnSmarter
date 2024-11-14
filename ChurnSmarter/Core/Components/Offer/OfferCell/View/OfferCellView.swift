@@ -17,7 +17,7 @@ struct OfferCellView: View {
                 .frame(height: 125)
                 .clipped()
             
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 10) {
                 HStack(spacing: 4) {
                     VStack(alignment: .leading, spacing: 0) {
                         Text(viewModel.card.name)
@@ -35,7 +35,7 @@ struct OfferCellView: View {
                             .font(.footnote)
                             .foregroundStyle(theme.labelColor.secondary)
                     }
-                    Text(viewModel.currentOfferValue)
+                    Text(viewModel.currentOfferValueText)
                         .foregroundStyle(theme.labelColor)
                         .font(.headline)
                 }
@@ -55,10 +55,10 @@ struct OfferCellView: View {
                 Divider()
                 
                 VStack(alignment: .leading) {
-                    Text(viewModel.currentOffer)
+                    Text(viewModel.currentOfferText)
                         .font(.subheadline)
                         .fontWeight(.medium)
-                    Text(viewModel.currentOfferSpend)
+                    Text(viewModel.currentOfferSpendText)
                         .foregroundStyle(.secondary)
                         .font(.footnote)
                 }
@@ -78,7 +78,6 @@ struct OfferCellView: View {
         .padding(.vertical, 3)
     }
 }
-
 
 #Preview {
     OffersView()

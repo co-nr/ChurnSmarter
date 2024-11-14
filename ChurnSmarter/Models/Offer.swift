@@ -1,6 +1,6 @@
 import Foundation
 
-struct Offer: Decodable {
+struct Offer: Decodable, Hashable {
     let spend: Double
     let amount: [OfferAmount]
     let days: Int
@@ -16,7 +16,7 @@ struct Offer: Decodable {
     }
 }
 
-struct OfferAmount: Decodable {
+struct OfferAmount: Decodable, Hashable {
     let amount: Int
     let currency: String?
 }

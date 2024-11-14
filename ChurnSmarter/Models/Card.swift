@@ -23,4 +23,9 @@ struct Card: Identifiable, Decodable {
     var imageUrlWithPrefix: String {
         return "https://offeroptimist.com" + imageUrl
     }
+    
+    var referralLink: URL? {
+        offers.compactMap { $0.referralUrl }.first.flatMap(URL.init)
+    }
+    
 }
