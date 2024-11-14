@@ -8,7 +8,19 @@ struct OfferFiltersView: View {
     var body: some View {
         NavigationStack {
             Form {
+                Section("Max Annual Fee") {
+                    HStack {
+                        Text("$\(Int(viewModel.maxAnnualFee))")
+                        Spacer()
+                        Slider(value: $viewModel.maxAnnualFee, in: 0...1000, step: 50)
+                    }
+                }
+                .listRowBackground(theme.secondaryBackgroundColor.opacity(0.5))
                 
+                Section {
+                    Toggle("Show Business Cards", isOn: $viewModel.showBusinessCards)
+                }
+                .listRowBackground(theme.secondaryBackgroundColor.opacity(0.5))
             }
             .scrollContentBackground(.hidden)
             .navigationTitle("Filters")

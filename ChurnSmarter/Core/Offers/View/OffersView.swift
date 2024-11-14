@@ -16,7 +16,7 @@ struct OffersView: View {
                 ScrollView(showsIndicators: false) {
                     if horizontalSizeClass == .compact {
                         LazyVStack {
-                            ForEach(viewModel.allCards) { card in
+                            ForEach(viewModel.filteredCards) { card in
                                 NavigationLink(destination: OfferDetailsView(card: card)) {
                                     OfferCellView(card: card)
                                 }
@@ -24,7 +24,7 @@ struct OffersView: View {
                         }
                     } else {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
-                            ForEach(viewModel.allCards) { card in
+                            ForEach(viewModel.filteredCards) { card in
                                 NavigationLink(destination: OfferDetailsView(card: card)) {
                                     OfferCellView(card: card)
                                 }
@@ -33,7 +33,7 @@ struct OffersView: View {
                     }
                 }
                 .searchable(text: $viewModel.searchText, prompt: "Card Name or Issuer")
-                .navigationTitle("Offers (\(viewModel.allCards.count))")
+                .navigationTitle("Offers (\(viewModel.filteredCards.count))")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {

@@ -37,15 +37,16 @@ final class OfferCalculator {
     }
     
     var netOfferValue: String {
+        return String(format: "$%.0f", netOfferValueDouble)
+    }
+    
+    var netOfferValueDouble: Double {
         guard let highestAmount = card.offers.compactMap({ $0.highestAmount }).max(), highestAmount > 0 else {
-            return "$0"
+            return 0.0
         }
         
         let pointValue = getPointValue(for: card.currency)
         let monetaryValue = Double(highestAmount) * pointValue
-        let netValue = monetaryValue - Double(card.annualFee)
-        
-        return String(format: "$%.0f", netValue)
+        return monetaryValue - Double(card.annualFee)
     }
 }
-
