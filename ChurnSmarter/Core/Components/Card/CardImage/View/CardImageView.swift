@@ -14,7 +14,7 @@ struct CardImageView: View {
                 Image(uiImage: image)
                     .resizable()
             } else if viewModel.isLoading {
-                Image(systemName: "creditcard.fill")
+                Image("creditcard")
                     .resizable()
             }
         }
