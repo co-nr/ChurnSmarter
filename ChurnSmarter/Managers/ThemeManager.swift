@@ -63,7 +63,8 @@ class ThemeManager: ObservableObject {
     private func themeIdentifier(for theme: ThemeProtocol) -> String {
         switch theme {
         case is MainTheme: return "MainTheme"
-        case is BlackWhiteTheme: return "BlackWhiteTheme"
+        case is DreamTheme: return "DreamTheme"
+        case is SpaceTheme: return "SpaceTheme"
         default: return "MainTheme"
         }
     }
@@ -71,7 +72,8 @@ class ThemeManager: ObservableObject {
     private func themeForIdentifier(_ identifier: String) -> ThemeProtocol {
         switch identifier {
         case "MainTheme": return MainTheme()
-        case "BlackWhiteTheme": return BlackWhiteTheme()
+        case "DreamTheme": return DreamTheme()
+        case "SpaceTheme": return SpaceTheme()
         default: return MainTheme()
         }
     }

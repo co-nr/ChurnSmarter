@@ -15,7 +15,7 @@ struct OffersView: View {
                 
                 ScrollView(showsIndicators: false) {
                     if horizontalSizeClass == .compact {
-                        LazyVStack {
+                        LazyVStack(spacing: 15) {
                             ForEach(viewModel.filteredCards) { card in
                                 NavigationLink(destination: OfferDetailsView(card: card)) {
                                     OfferCellView(card: card)

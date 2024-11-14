@@ -75,7 +75,6 @@ struct OfferCellView: View {
                 .stroke(theme.labelColor.opacity(0.3), lineWidth: 1)
         )
         .padding(.horizontal, 10)
-        .padding(.vertical, 3)
     }
 }
 

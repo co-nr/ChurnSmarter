@@ -19,7 +19,8 @@ struct DisplaySettingsView: View {
                 
                 Section("Themes") {
                     ThemeSelectionButton(themeType: MainTheme(), label: "Main")
-                    ThemeSelectionButton(themeType: BlackWhiteTheme(), label: "Black & White")
+                    ThemeSelectionButton(themeType: DreamTheme(), label: "Dream")
+                    ThemeSelectionButton(themeType: SpaceTheme(), label: "Space")
                 }
                 .listRowBackground(theme.secondaryBackgroundColor)
             }

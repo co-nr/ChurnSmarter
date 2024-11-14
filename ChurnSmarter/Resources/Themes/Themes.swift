@@ -7,9 +7,16 @@ struct MainTheme: ThemeProtocol {
     var labelColor: Color { return Color("MainLabelColor") }
 }
 
-struct BlackWhiteTheme: ThemeProtocol {
-    var tintColor: Color { return Color("BlackWhiteTintColor") }
-    var primaryBackgroundColor: Color { return Color("BlackWhitePrimaryBackgroundColor") }
-    var secondaryBackgroundColor: Color { return Color("BlackWhiteSecondaryBackgroundColor") }
-    var labelColor: Color { return Color("BlackWhiteLabelColor") }
+struct DreamTheme: ThemeProtocol {
+    var tintColor: Color { return Color("DreamTintColor") }
+    var primaryBackgroundColor: Color { return Color("DreamPrimaryBackgroundColor") }
+    var secondaryBackgroundColor: Color { return Color("DreamSecondaryBackgroundColor") }
+    var labelColor: Color { return Color("DreamLabelColor") }
+}
+
+struct SpaceTheme: ThemeProtocol {
+    var tintColor: Color { return Color("SpaceTintColor") }
+    var primaryBackgroundColor: Color { return Color("SpacePrimaryBackgroundColor") }
+    var secondaryBackgroundColor: Color { return Color("SpaceSecondaryBackgroundColor") }
+    var labelColor: Color { return Color("SpaceLabelColor") }
 }
