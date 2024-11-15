@@ -13,7 +13,7 @@ public struct CloseToolbarItem: ToolbarContent {
                 dismiss()
             }, label: {
                 Image(systemName: "xmark")
-                    .font(.caption)
+                    .font(.caption2)
                     .padding(7)
                     .background(Circle().fill(theme.secondaryBackgroundColor))
             })
