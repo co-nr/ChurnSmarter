@@ -29,9 +29,22 @@
 		B33B0A142CD8FCBD001F2D4D /* ChurnSmarterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChurnSmarterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B3CA133E2CE6D9BF006296E3 /* Exceptions for "ChurnSmarter" folder in "ChurnSmarter" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B33B09F92CD8FCBC001F2D4D /* ChurnSmarter */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B33B09FC2CD8FCBC001F2D4D /* ChurnSmarter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B3CA133E2CE6D9BF006296E3 /* Exceptions for "ChurnSmarter" folder in "ChurnSmarter" target */,
+			);
 			path = ChurnSmarter;
 			sourceTree = "<group>";
 		};
@@ -399,8 +412,8 @@
 				DEVELOPMENT_TEAM = 7U8FP2553V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChurnSmarter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Churn Smarter";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -431,8 +444,8 @@
 				DEVELOPMENT_TEAM = 7U8FP2553V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ChurnSmarter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Churn Smarter";
-				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
