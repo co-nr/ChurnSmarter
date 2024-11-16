@@ -4,8 +4,8 @@ import Combine
 /*
  Wyndham Rewards Earner - SVG File
  Latam Airlines - SVG File
- Savor - down
  Business Altitude Power - down
+ altitude-connect - down
 */
 
 final class CardImageService {
@@ -17,10 +17,11 @@ final class CardImageService {
     private let fileManager = LocalFileManager.shared
     private let folderName = "card_images"
     private let imageName: String
+    private let baseUrl: String = "https://offeroptimist.com"
     
     init(card: Card) {
         self.card = card
-        self.imageName = (card.name + card.issuer).replacingOccurrences(of: "[^a-zA-Z0-9]", with: "_", options: .regularExpression)
+        self.imageName = (card.name + card.issuer)
         getCardImage()
     }
     
@@ -33,8 +34,8 @@ final class CardImageService {
     }
     
     private func downloadCardImage() {
-        guard let url = URL(string: card.imageUrlWithPrefix) else {
-            print("DEBUG: Invalid URL \(card.imageUrlWithPrefix)")
+        guard let url = URL(string: baseUrl + card.imageUrl) else {
+            print("DEBUG: Invalid URL \(card.name)")
             return
         }
         imageSubscription = NetworkingManager.download(url: url)
