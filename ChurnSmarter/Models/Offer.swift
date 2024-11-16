@@ -5,7 +5,6 @@ struct Offer: Decodable, Hashable {
     let amount: [OfferAmount]
     let days: Int
     let expiration: String?
-    let isPublic: Bool?
     let credits: [Credit]
     let details: String?
     let url: String?

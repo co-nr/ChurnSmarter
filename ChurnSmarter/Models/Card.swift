@@ -20,10 +20,6 @@ struct Card: Identifiable, Decodable {
     let offers: [Offer]
     let historicalOffers: [Offer]
     
-    var referralLink: URL? {
-        offers.compactMap { $0.referralUrl }.first.flatMap(URL.init)
-    }
-    
     private enum CodingKeys: CodingKey {
         case name
         case issuer
@@ -41,4 +37,9 @@ struct Card: Identifiable, Decodable {
         case offers
         case historicalOffers
     }
+    
+    var referralLink: URL? {
+        offers.compactMap { $0.referralUrl }.first.flatMap(URL.init)
+    }
+    
 }
