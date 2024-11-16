@@ -3,7 +3,7 @@ import Foundation
 //https://raw.githubusercontent.com/andenacitelli/credit-card-bonuses-api/main/exports/data.json
 
 struct Card: Identifiable, Decodable {
-    let id = UUID()
+    let id: UUID = UUID()
     let name: String
     let issuer: String
     let network: String
@@ -28,4 +28,21 @@ struct Card: Identifiable, Decodable {
         offers.compactMap { $0.referralUrl }.first.flatMap(URL.init)
     }
     
+    private enum CodingKeys: String, CodingKey {
+        case name
+        case issuer
+        case network
+        case currency
+        case countsTowards524
+        case details
+        case isBusiness
+        case annualFee
+        case isAnnualFeeWaived
+        case universalCashbackPercent
+        case url
+        case imageUrl
+        case credits
+        case offers
+        case historicalOffers
+    }
 }
