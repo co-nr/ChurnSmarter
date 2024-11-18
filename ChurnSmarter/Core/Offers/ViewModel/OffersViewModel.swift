@@ -21,15 +21,15 @@ final class OffersViewModel: ObservableObject {
                 (showBusinessCards || !(card.isBusiness)) &&
                 card.annualFee <= Int(maxAnnualFee) &&
                 (searchText.isEmpty ||
-                 card.name.format.localizedCaseInsensitiveContains(searchText) ||
-                 card.issuer.format.localizedCaseInsensitiveContains(searchText))
+                 card.name.display.localizedCaseInsensitiveContains(searchText) ||
+                 card.issuer.display.localizedCaseInsensitiveContains(searchText))
             }
             .sorted { highestOfferValue(for: $0) > highestOfferValue(for: $1) }
     }
     
     private func highestOfferValue(for card: Card) -> Double {
         let calculator = OfferCalculator(card: card)
-        return calculator.netOfferValueDouble
+        return card.offers.map { calculator.offerValue(for: $0) }.max() ?? 0
     }
     
     private func setupSubscribers() {

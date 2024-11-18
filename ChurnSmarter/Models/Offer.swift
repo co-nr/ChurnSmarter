@@ -10,9 +10,14 @@ struct Offer: Decodable, Hashable {
     let url: String?
     let referralUrl: String?
     
-    var highestAmount: Int {
-        amount.compactMap { $0.amount }.max() ?? 0
+    func formattedAmount(using cardCurrency: String) -> String {
+        amount.map { "\($0.amount.formatted(.number)) \($0.currency?.display ?? cardCurrency.display)" }.joined(separator: " + ")
     }
+    
+    var formattedSpend: String {
+        "Spend $\(spend.formatted(.number)) in \(days) days"
+    }
+    
 }
 
 struct OfferAmount: Decodable, Hashable {

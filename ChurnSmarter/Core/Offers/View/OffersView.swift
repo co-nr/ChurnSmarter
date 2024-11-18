@@ -15,10 +15,16 @@ struct OffersView: View {
                 
                 ScrollView(showsIndicators: false) {
                     if horizontalSizeClass == .compact {
-                        LazyVStack(spacing: 15) {
+                        LazyVStack(spacing: 12) {
                             ForEach(viewModel.filteredCards) { card in
                                 NavigationLink(destination: OfferDetailsView(card: card)) {
-                                    OfferCellView(card: card)
+                                    OfferCell(card: card)
+//                                        .scrollTransition(.animated.threshold(.visible(0.1))) { content, phase in
+//                                            content
+//                                                .opacity(phase.isIdentity ? 1 : 0)
+//                                                .scaleEffect(phase.isIdentity ? 1 : 0.85)
+//                                        }
+                                        .padding(.horizontal, 10)
                                 }
                             }
                         }
@@ -26,7 +32,8 @@ struct OffersView: View {
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 15) {
                             ForEach(viewModel.filteredCards) { card in
                                 NavigationLink(destination: OfferDetailsView(card: card)) {
-                                    OfferCellView(card: card)
+                                    OfferCell(card: card)
+                                        .padding(.horizontal, 10)
                                 }
                             }
                         }
@@ -55,7 +62,6 @@ struct OffersView: View {
                     OfferFiltersView()
                         .environmentObject(viewModel)
                         .presentationDetents([.medium, .large])
-                        .presentationBackground(.thinMaterial)
                 }
                 .sheet(isPresented: $isShowingSettings) {
                     SettingsView()

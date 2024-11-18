@@ -17,10 +17,10 @@ struct OfferDetailsView: View {
                 cardImageSection
                 overviewSection
                 if !card.offers.isEmpty {
-                    OffersSection(title: "Current Offers", offers: card.offers, currency: card.currency.format)
+                    OffersSection(title: "Current Offers", offers: card.offers, currency: card.currency.display)
                 }
                 if !card.historicalOffers.isEmpty {
-                    OffersSection(title: "Historical Offers", offers: card.historicalOffers, currency: card.currency.format)
+                    OffersSection(title: "Historical Offers", offers: card.historicalOffers, currency: card.currency.display)
                 }
                 
                 if !card.credits.isEmpty {
@@ -58,12 +58,12 @@ extension OfferDetailsView {
     
     private var overviewSection: some View {
         Section("Overview") {
-            OverviewRow(title: "Issuer", value: card.issuer.format)
-            OverviewRow(title: "Currency", value: card.currency.format)
+            OverviewRow(title: "Issuer", value: card.issuer.display)
+            OverviewRow(title: "Currency", value: card.currency.display)
             OverviewRow(title: "Annual Fee", value: "$\(card.annualFee)")
-            if card.currency != "USD" {
-                OverviewRow(title: "Points Value", value: "\(String(format: "%.2f", calculator.getPointValue(for: card.currency) * 100))¢")
-            }
+//            if card.currency != "USD" {
+//                OverviewRow(title: "Points Value", value: "\(String(format: "%.2f", calculator.getPointValue(for: card.currency) * 100))¢")
+//            }
             if let url = URL(string: card.url) {
                 HStack {
                     Text("Official Page:")

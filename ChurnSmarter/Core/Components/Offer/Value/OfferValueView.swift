@@ -16,10 +16,10 @@ struct OfferValueView: View {
             List {
                 Section {
                     HStack {
-                        Text(calculator.offerBreakdownText)
-                            .fontWeight(.medium)
-                        Spacer()
-                        Text(calculator.grossOfferValue)
+//                        Text(calculator.offerBreakdownText)
+//                            .fontWeight(.medium)
+//                        Spacer()
+//                        Text(calculator.grossOfferValue)
                     }
                     HStack {
                         Text("Annual Fee:")
@@ -31,9 +31,9 @@ struct OfferValueView: View {
                         Text("Net Value:")
                             .fontWeight(.medium)
                         Spacer()
-                        Text(calculator.netOfferValue)
-                            .foregroundStyle(theme.tintColor)
-                            .bold()
+//                        Text(calculator.netOfferValue)
+//                            .foregroundStyle(theme.tintColor)
+//                            .bold()
                     }
                 } header: {
                     Text("Offer Value")

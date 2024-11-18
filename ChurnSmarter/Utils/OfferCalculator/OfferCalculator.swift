@@ -8,45 +8,42 @@ final class OfferCalculator {
         self.card = card
     }
     
-    func getPointValue(for currency: String) -> Double {
+    func pointValue(for currency: String) -> Double {
         return pointValues[currency] ?? 0.01
     }
     
-    var offerBreakdownText: String {
-        guard let highestAmount = card.offers.compactMap({ $0.highestAmount }).max(), highestAmount > 0 else {
-            return "No offers available"
+    func offerValue(for offer: Offer) -> Double {
+        let totalValue = offer.amount.reduce(0.0) { result, offerAmount in
+            let pointValue = pointValue(for: offerAmount.currency ?? card.currency)
+            return result + (Double(offerAmount.amount) * pointValue)
         }
         
-        if card.currency == "USD" {
-            return "Gross Value:"
-        }
-        
-        let pointValue = getPointValue(for: card.currency) * 100
-        return "\(highestAmount.formatted(.number)) points @ \(String(format: "%.2f", pointValue))¢ per point:"
+        let netValue = totalValue - Double(card.annualFee)
+        return max(netValue, 0)
     }
     
-    var grossOfferValue: String {
-        guard let highestAmount = card.offers.compactMap({ $0.highestAmount }).max(), highestAmount > 0 else {
-            return "$0"
-        }
-        
-        let pointValue = getPointValue(for: card.currency)
-        let totalValue = Double(highestAmount) * pointValue
-        
-        return String(format: "$%.0f", totalValue)
+    func highestOffer() -> Offer? {
+        card.offers.max { offerValue(for: $0) < offerValue(for: $1) }
     }
     
-    var netOfferValue: String {
-        return String(format: "$%.0f", netOfferValueDouble)
+    func highestOfferValue() -> Double {
+        guard let highestOffer = highestOffer() else {
+            return 0
+        }
+        return offerValue(for: highestOffer)
     }
     
-    var netOfferValueDouble: Double {
-        guard let highestAmount = card.offers.compactMap({ $0.highestAmount }).max(), highestAmount > 0 else {
-            return 0.0
-        }
+    func percentageOfHistoricalMax() -> Double {
+        let highestHistoricalValue = card.historicalOffers
+            .map { offerValue(for: $0) }
+            .max() ?? 0
         
-        let pointValue = getPointValue(for: card.currency)
-        let monetaryValue = Double(highestAmount) * pointValue
-        return monetaryValue - Double(card.annualFee)
+        guard highestHistoricalValue > 0 else { return 0 }
+        
+        let highestCurrentValue = card.offers
+            .map { offerValue(for: $0) }
+            .max() ?? 0
+        
+        return (highestCurrentValue / highestHistoricalValue) * 100
     }
 }

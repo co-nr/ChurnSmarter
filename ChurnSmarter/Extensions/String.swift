@@ -1,7 +1,7 @@
 import Foundation
 
 extension String {
-    var format: String {
+    var display: String {
         if self.count <= 3 {
             return self.uppercased()
         } else {

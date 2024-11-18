@@ -15,13 +15,14 @@ struct OfferFiltersView: View {
                         Slider(value: $viewModel.maxAnnualFee, in: 0...1000, step: 50)
                     }
                 }
-                .listRowBackground(theme.secondaryBackgroundColor.opacity(0.5))
+                .listRowBackground(theme.secondaryBackgroundColor)
                 
                 Section {
                     Toggle("Show Business Cards", isOn: $viewModel.showBusinessCards)
                 }
-                .listRowBackground(theme.secondaryBackgroundColor.opacity(0.5))
+                .listRowBackground(theme.secondaryBackgroundColor)
             }
+            .background(theme.primaryBackgroundColor)
             .scrollContentBackground(.hidden)
             .navigationTitle("Filters")
             .navigationBarTitleDisplayMode(.inline)
