@@ -3,8 +3,9 @@ import SwiftUI
 struct OfferDetailsView: View {
     
     @EnvironmentObject private var theme: ThemeManager
-    let card: Card
+    private let card: Card
     private let calculator: OfferCalculator
+    @Namespace private var namespace
     
     init(card: Card) {
         self.card = card
@@ -28,17 +29,19 @@ struct OfferDetailsView: View {
                 }
                 
             }
+            .applyiOS18Modifiers(namespace: namespace)
             .font(.subheadline)
             .background(theme.primaryBackgroundColor)
             .scrollContentBackground(.hidden)
             .navigationTitle(card.name)
             .navigationBarTitleDisplayMode(.inline)
+            .tint(theme.tintColor)
         }
     }
 }
 
 #Preview {
-    OffersView()
+    OfferDetailsView(card: DeveloperPreview.card)
         .environmentObject(ThemeManager())
 }
 
@@ -61,9 +64,9 @@ extension OfferDetailsView {
             OverviewRow(title: "Issuer", value: card.issuer.display)
             OverviewRow(title: "Currency", value: card.currency.display)
             OverviewRow(title: "Annual Fee", value: "$\(card.annualFee)")
-//            if card.currency != "USD" {
-//                OverviewRow(title: "Points Value", value: "\(String(format: "%.2f", calculator.getPointValue(for: card.currency) * 100))¢")
-//            }
+            if card.currency != "USD" {
+                OverviewRow(title: "Points Value", value: "\(String(format: "%.2f", calculator.pointValue(for: card.currency) * 100))¢")
+            }
             if let url = URL(string: card.url) {
                 HStack {
                     Text("Official Page:")
@@ -86,5 +89,19 @@ extension OfferDetailsView {
             }
         }
         .listRowBackground(theme.secondaryBackgroundColor)
+    }
+}
+
+private extension View {
+    @ViewBuilder
+    func applyiOS18Modifiers(namespace: Namespace.ID) -> some View {
+        if #available(iOS 18, *) {
+            self
+                .navigationBarBackButtonHidden()
+                .navigationTransition(.zoom(sourceID: "zoom", in: namespace))
+                .toolbar { CloseToolbarItem() }
+        } else {
+            self
+        }
     }
 }

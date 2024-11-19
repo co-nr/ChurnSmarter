@@ -25,6 +25,8 @@ struct OfferCell: View {
                 .stroke(theme.labelColor.opacity(0.3), lineWidth: 1)
         )
         .foregroundStyle(theme.labelColor)
+        .padding(.horizontal, 10)
+        .drawingGroup()
         .sheet(isPresented: $isShowingOfferValue) {
             OfferValueView(card: card)
                 .presentationDetents([.medium])
@@ -35,7 +37,6 @@ struct OfferCell: View {
 #Preview {
     OfferCell(card: DeveloperPreview.card)
         .environmentObject(ThemeManager())
-        .padding(10)
 }
 
 private extension OfferCell {

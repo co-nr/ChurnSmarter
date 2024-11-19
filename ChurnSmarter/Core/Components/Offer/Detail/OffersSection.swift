@@ -13,11 +13,9 @@ struct OffersSection: View {
             ForEach(offers, id: \.self) { offer in
                 HStack {
                     VStack(alignment: .leading) {
-                        ForEach(offer.amount, id: \.self) { amount in
-                            Text("\(amount.amount.formatted(.number)) \(amount.currency ?? currency)")
-                                .fontWeight(.medium)
-                        }
-                        Text(String(format: "Spend $%@ in %d days", offer.spend.formatted(.number), offer.days))
+                        Text(offer.formattedAmount(using: currency))
+                            .fontWeight(.medium)
+                        Text(offer.formattedSpend)
                             .font(.footnote)
                             .foregroundStyle(.secondary)
                         
