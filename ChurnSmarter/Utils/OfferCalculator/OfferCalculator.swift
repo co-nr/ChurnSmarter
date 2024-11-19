@@ -33,6 +33,17 @@ final class OfferCalculator {
         return offerValue(for: highestOffer)
     }
     
+    func highestGrossOfferValue() -> Double {
+        card.offers.map { grossOfferValue(for: $0) }.max() ?? 0
+    }
+    
+    func grossOfferValue(for offer: Offer) -> Double {
+        offer.amount.reduce(0.0) { result, offerAmount in
+            let pointValue = pointValue(for: offerAmount.currency ?? card.currency)
+            return result + (Double(offerAmount.amount) * pointValue)
+        }
+    }
+    
     func percentageOfHistoricalMax() -> Double {
         let highestHistoricalValue = card.historicalOffers
             .map { offerValue(for: $0) }
@@ -46,4 +57,17 @@ final class OfferCalculator {
         
         return (highestCurrentValue / highestHistoricalValue) * 100
     }
+    
+    func formattedDescriptions(for offer: Offer) -> [String] {
+        offer.amount.map { offerAmount in
+            let currency = offerAmount.currency ?? card.currency
+            if currency == "USD" {
+                return "Cash Offer:"
+            } else {
+                let pointValue = pointValue(for: currency) * 100
+                return "\(offerAmount.amount.formatted(.number)) points @ \(String(format: "%.2f", pointValue))¢ per point:"
+            }
+        }
+    }
+    
 }
