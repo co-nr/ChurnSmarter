@@ -5,7 +5,6 @@ struct OfferDetailsView: View {
     @EnvironmentObject private var theme: ThemeManager
     private let card: Card
     private let calculator: OfferCalculator
-    @Namespace private var namespace
     
     init(card: Card) {
         self.card = card
@@ -29,7 +28,6 @@ struct OfferDetailsView: View {
                 }
                 
             }
-            .applyiOS18Modifiers(namespace: namespace)
             .font(.subheadline)
             .background(theme.primaryBackgroundColor)
             .scrollContentBackground(.hidden)
@@ -89,19 +87,5 @@ extension OfferDetailsView {
             }
         }
         .listRowBackground(theme.secondaryBackgroundColor)
-    }
-}
-
-private extension View {
-    @ViewBuilder
-    func applyiOS18Modifiers(namespace: Namespace.ID) -> some View {
-        if #available(iOS 18, *) {
-            self
-                .navigationBarBackButtonHidden()
-                .navigationTransition(.zoom(sourceID: "zoom", in: namespace))
-                .toolbar { CloseToolbarItem() }
-        } else {
-            self
-        }
     }
 }
