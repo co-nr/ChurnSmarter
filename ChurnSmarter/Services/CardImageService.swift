@@ -1,13 +1,6 @@
 import SwiftUI
 import Combine
 
-/*
- Wyndham Rewards Earner - SVG File
- Latam Airlines - SVG File
- Business Altitude Power - down
- altitude-connect - down
-*/
-
 final class CardImageService {
     
     @Published var image: UIImage? = nil
@@ -21,7 +14,7 @@ final class CardImageService {
     
     init(card: Card) {
         self.card = card
-        self.imageName = (card.name + card.issuer)
+        self.imageName = card.cardId
         getCardImage()
     }
     

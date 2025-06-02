@@ -64,7 +64,6 @@ class ThemeManager: ObservableObject {
         switch theme {
         case is MainTheme: return "MainTheme"
         case is DreamTheme: return "DreamTheme"
-        case is SpaceTheme: return "SpaceTheme"
         default: return "MainTheme"
         }
     }
@@ -73,7 +72,6 @@ class ThemeManager: ObservableObject {
         switch identifier {
         case "MainTheme": return MainTheme()
         case "DreamTheme": return DreamTheme()
-        case "SpaceTheme": return SpaceTheme()
         default: return MainTheme()
         }
     }

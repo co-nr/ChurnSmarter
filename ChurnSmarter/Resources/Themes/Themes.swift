@@ -13,10 +13,3 @@ struct DreamTheme: ThemeProtocol {
     var secondaryBackgroundColor: Color { return Color("DreamSecondaryBackgroundColor") }
     var labelColor: Color { return Color("DreamLabelColor") }
 }
-
-struct SpaceTheme: ThemeProtocol {
-    var tintColor: Color { return Color("SpaceTintColor") }
-    var primaryBackgroundColor: Color { return Color("SpacePrimaryBackgroundColor") }
-    var secondaryBackgroundColor: Color { return Color("SpaceSecondaryBackgroundColor") }
-    var labelColor: Color { return Color("SpaceLabelColor") }
-}

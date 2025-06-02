@@ -1,7 +1,5 @@
-import Foundation
-
 struct Credit: Decodable, Hashable {
-    let description: String?
-    let value: Int?
-    let weight: Double?
+    let description: String
+    let value: Double
+    let weight: Double
 }
