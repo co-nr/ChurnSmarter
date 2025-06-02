@@ -9,14 +9,16 @@ struct CardsView: View {
     @StateObject private var viewModel = CardsViewModel()
     @State private var isShowingFilters = false
     @State private var isShowingSettings = false
+    @Namespace private var namespace
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: adaptiveColumns, spacing: 15) {
                     ForEach(viewModel.filteredCards) { card in
-                        NavigationLink(destination: CardDetailsView(card: card)) {
+                        NavigationLink(value: card) {
                             CardOfferCell(card: card)
+                                .matchedTransitionSource(id: card, in: namespace)
                                 .scrollTransition(.animated.threshold(.visible(0.1))) { content, phase in
                                     content
                                         .opacity(phase.isIdentity ? 1 : 0)
@@ -33,6 +35,10 @@ struct CardsView: View {
                     isShowingFilters: $isShowingFilters,
                     isShowingSettings: $isShowingSettings
                 )
+            }
+            .navigationDestination(for: Card.self) { card in
+                CardDetailsView(card: card)
+                    .navigationTransition(.zoom(sourceID: card, in: namespace))
             }
             .sheet(isPresented: $isShowingSettings) {
                 SettingsView()

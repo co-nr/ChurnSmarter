@@ -30,7 +30,7 @@ private extension SettingsView {
     
     var about: some View {
         Section("About") {
-            VStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text("This project is an open source tool for comparing current and historical credit card offers.")
                 Text("Offers are sorted by their estimated net value, excluding credits.")
             }

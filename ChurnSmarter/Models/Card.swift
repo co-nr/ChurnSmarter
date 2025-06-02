@@ -1,6 +1,6 @@
 //https://raw.githubusercontent.com/andenacitelli/credit-card-bonuses-api/main/exports/data.json
 
-struct Card: Identifiable, Decodable {
+struct Card: Identifiable, Decodable, Hashable {
     let cardId: String
     let name: String
     let issuer: Issuer
