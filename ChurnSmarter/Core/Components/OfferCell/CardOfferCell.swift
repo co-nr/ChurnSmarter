@@ -14,6 +14,7 @@ struct CardOfferCell: View {
         .background(theme.secondaryBackgroundColor)
         .foregroundStyle(theme.labelColor)
         .cornerRadius(10)
+        .drawingGroup()
         .overlay(
             RoundedRectangle(cornerRadius: 10)
                 .stroke(theme.labelColor.opacity(0.3), lineWidth: 1)
