@@ -20,9 +20,7 @@ struct CardDetailsView: View {
             }
         }
         .font(.subheadline)
-        .navigationBarBackButtonHidden(true)
         .applyThemedList(title: card.name)
-        .toolbar { CloseToolbarItem() }
     }
 }
 

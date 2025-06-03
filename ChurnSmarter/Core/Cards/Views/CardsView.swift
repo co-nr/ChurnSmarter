@@ -2,28 +2,20 @@ import SwiftUI
 
 struct CardsView: View {
     
-    private var adaptiveColumns: [GridItem] {
-        [GridItem(.adaptive(minimum: 300), spacing: 5)]
-    }
+    private var adaptiveColumns: [GridItem] { [GridItem(.adaptive(minimum: 300))] }
     @EnvironmentObject private var theme: ThemeManager
     @StateObject private var viewModel = CardsViewModel()
     @State private var isShowingFilters = false
     @State private var isShowingSettings = false
-    @Namespace private var namespace
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: adaptiveColumns, spacing: 15) {
                     ForEach(viewModel.filteredCards) { card in
-                        NavigationLink(value: card) {
+                        NavigationLink(destination: CardDetailsView(card: card)) {
                             CardOfferCell(card: card)
-                                .matchedTransitionSource(id: card, in: namespace)
-                                .scrollTransition(.animated.threshold(.visible(0.1))) { content, phase in
-                                    content
-                                        .opacity(phase.isIdentity ? 1 : 0)
-                                        .scaleEffect(phase.isIdentity ? 1 : 0.80)
-                                }
+                                .applyScrollAnimations()
                         }
                     }
                 }
@@ -36,12 +28,9 @@ struct CardsView: View {
                     isShowingSettings: $isShowingSettings
                 )
             }
-            .navigationDestination(for: Card.self) { card in
-                CardDetailsView(card: card)
-                    .navigationTransition(.zoom(sourceID: card, in: namespace))
-            }
             .sheet(isPresented: $isShowingSettings) {
                 SettingsView()
+                    .environmentObject(theme)
             }
             .sheet(isPresented: $isShowingFilters) {
                 CardFiltersView()
